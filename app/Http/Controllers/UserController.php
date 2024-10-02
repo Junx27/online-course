@@ -81,15 +81,22 @@ class UserController extends Controller
         return Inertia::location("/produk-affiliate");
     }
 
-    public function dataAffiliate()
+    public function dataAffiliate(Request $request)
     {
+        // Ambil user_id dari request atau dari authenticated user
+        $userId = $request->user()->id; // Jika menggunakan autentikasi
+
+        // Ambil data affiliate berdasarkan user_id
         $dataAffiliate = DataAffiliate::with([
             'user:id,nama,email,kontak',
             'kelas:id,nama_kelas,gambar_kelas,harga_kelas,deskripsi_kelas'
-        ])->get();
+        ])
+            ->where('user_id', $userId) // Filter berdasarkan user_id
+            ->get();
 
         return response()->json($dataAffiliate);
     }
+
     public function dataAffiliateDetail(String $id)
     {
         $dataAffiliate = DataAffiliate::with([

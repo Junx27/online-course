@@ -76,7 +76,7 @@ function DashboardAffiliate({ auth }) {
             >
                 <div>
                     {errors.message && (
-                        <div className="flex justify-between">
+                        <div className="flex justify-between mt-20">
                             <div className="bg-red-500 text-white p-3 rounded">
                                 {errors.message}
                             </div>
@@ -137,11 +137,7 @@ function DashboardAffiliate({ auth }) {
                                 className="w-20 h-20 md:w-32 md:h-32 object-cover mx-auto"
                             />
                             <p className="mt-5 font-bold text-5xl text-orange-500">
-                                {
-                                    dataAffiliate.filter(
-                                        (i) => i.user_id === auth.user.id
-                                    ).length
-                                }
+                                {dataAffiliate.length}
                             </p>
                             <p className="text-center mt-3">Kelas Affiliate</p>
                         </div>
