@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import RoleAccess from "../Middleware/RoleAccess";
 import AffiliateSideBar from "@/Components/AffiliateSideBar";
 import Pattern2 from "@/Components/Pattern2";
-import { useForm } from "@inertiajs/react";
+import { Head, useForm } from "@inertiajs/react";
 
 function PengaturanAffiliate({ auth }) {
     const [image, setImage] = useState(null);
@@ -33,12 +33,13 @@ function PengaturanAffiliate({ auth }) {
                         : `storage/${auth.user.gambar}`
                 }
             >
+                <Head title="Pengaturan Affiliate" />
                 <div className="flex gap-10 items-center p-5 md:p-10">
                     <div className="w-full mx-auto p-32 hidden md:block">
                         <h1 className="font-bold text-5xl">Tips</h1>
                         <p className="my-5">
                             Rubahlah data affiliate agar mudah dikenali oleh
-                            Admin Event Academy. Saran jangan sering merubah
+                            admin Event Academy. Saran jangan sering merubah
                             profil, gunakan dengan bijak.
                         </p>
                         <Pattern2>
@@ -52,7 +53,7 @@ function PengaturanAffiliate({ auth }) {
                     <div className="w-full p-5 pattern-1">
                         <form
                             onSubmit={submit}
-                            className="bg-white p-2 md:p-5 flex flex-col gap-5"
+                            className="p-2 md:p-5 flex flex-col gap-5 shadow-lg"
                             encType="multipart/form-data"
                         >
                             <div className="flex flex-col gap-3">
@@ -102,7 +103,7 @@ function PengaturanAffiliate({ auth }) {
                                 <input
                                     type="text"
                                     id="nama"
-                                    className="mt-1 block w-full"
+                                    className="mt-1 block w-full border-none outline-none bg-blue-50"
                                     value={data.nama}
                                     onChange={(e) =>
                                         setData("nama", e.target.value)
@@ -120,7 +121,7 @@ function PengaturanAffiliate({ auth }) {
                                 <input
                                     id="email"
                                     type="email"
-                                    className="mt-1 block w-full"
+                                    className="mt-1 block w-full border-none outline-none bg-blue-50"
                                     value={data.email}
                                     onChange={(e) =>
                                         setData("email", e.target.value)
@@ -138,7 +139,7 @@ function PengaturanAffiliate({ auth }) {
                                 <input
                                     type="number"
                                     id="kontak"
-                                    className="mt-1 block w-full"
+                                    className="mt-1 block w-full border-none outline-none bg-blue-50"
                                     value={data.kontak}
                                     onChange={(e) =>
                                         setData("kontak", e.target.value)

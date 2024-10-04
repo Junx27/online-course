@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import RoleAccess from "../Middleware/RoleAccess";
 import AffiliateSideBar from "@/Components/AffiliateSideBar";
 import axios from "axios";
-import { useForm, usePage } from "@inertiajs/react";
+import { Head, useForm, usePage } from "@inertiajs/react";
 import FormaterRupiah from "@/Components/FormaterRupiah";
 
 function ProdukAffiliate({ auth }) {
@@ -30,6 +30,7 @@ function ProdukAffiliate({ auth }) {
                 }
             >
                 <div>
+                    <Head title="Kelas Affiliate" />
                     <h1 className="font-bold text-3xl md:text-5xl text-center mt-10 md:mt-20">
                         Daftar
                         <span className="text-blue-800 mx-2">Kelas</span>
@@ -46,37 +47,31 @@ function ProdukAffiliate({ auth }) {
                         {dataKelas.map((i) => (
                             <div
                                 key={i.id}
-                                className="transition-all duration-500 bg-white shadow hover:shadow-lg hover:shadow-blue-500/50 cursor-pointer"
+                                className="relative group h-96 transition-all duration-500 bg-white shadow hover:shadow-lg hover:shadow-blue-500/50 cursor-pointer overflow-hidden"
                             >
                                 <img
                                     src={`storage/${i.kelas.gambar_kelas}`}
                                     alt=""
-                                    className="w-full h-96 object-cover"
+                                    className="transition-all duration-500 w-full h-full object-cover group-hover:scale-105"
                                 />
-                                <div className="p-5">
-                                    <h1 className="font-bold text-2xl capitalize">
+                                <div className="inset-0 w-full h-full group-hover:bg-blue-800/50 bg-gradient-to-t from-blue-800 to-transparent absolute mt-20 group-hover:mt-0"></div>
+                                <div className="transition-all duration-500 inset-0 absolute p-5 top-64 group-hover:top-10">
+                                    <h1 className="font-bold text-2xl capitalize text-white line-clamp-2">
                                         {i.kelas.nama_kelas}
                                     </h1>
-                                    <p className="my-2 text-justify h-32">
+                                    <p className="transition-all duration-700 text-white group-hover:mt-5 mt-32 line-clamp-3">
                                         {i.kelas.deskripsi_kelas}
                                     </p>
-                                    <p className="mt-2 text-blue-800 font-bold text-2xl">
+                                    <p className="transition-all duration-700 text-white group-hover:mt-5 mt-32 text-2xl">
                                         <FormaterRupiah
                                             number={i.kelas.harga_kelas}
                                         />
                                     </p>
-                                    <div className="mt-5">
+                                    <div className="transition-all duration-500 text-white hover:bg-white/10 p-2 absolute -right-10 group-hover:bottom-5 group-hover:right-5 text-xl font-bold">
                                         <a
                                             href={`/class-detail-affiliate/786ad${i.id}ujh635035772`}
                                         >
-                                            <button className="transition-all duration-500 flex items-center gap-3 font-bold bg-blue-800 p-2 w-full text-center border-2 border-blue-800 text-white hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-500/50">
-                                                <img
-                                                    src="/assets/logout.png"
-                                                    alt=""
-                                                    className="w-10 h-10 bg-white"
-                                                />
-                                                Share Affiliate Link &rarr;
-                                            </button>
+                                            Share Affiliate Link &rarr;
                                         </a>
                                     </div>
                                 </div>

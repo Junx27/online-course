@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import RoleAccess from "../Middleware/RoleAccess";
 import SideBar from "@/Components/SideBar";
 import Pattern2 from "@/Components/Pattern2";
-import { useForm } from "@inertiajs/react";
+import { Head, useForm } from "@inertiajs/react";
 
 function PengaturanAdmin({ auth }) {
     const [image, setImage] = useState(null);
@@ -33,6 +33,7 @@ function PengaturanAdmin({ auth }) {
                         : `storage/${auth.user.gambar}`
                 }
             >
+                <Head title="Pengaturan Admin" />
                 <div className="flex gap-10 items-center p-5 md:p-10">
                     <div className="w-full mx-auto p-32 hidden md:block">
                         <h1 className="font-bold text-5xl">Tips</h1>
@@ -51,7 +52,7 @@ function PengaturanAdmin({ auth }) {
                     <div className="w-full p-5 pattern-1">
                         <form
                             onSubmit={submit}
-                            className="bg-white p-2 md:p-5 flex flex-col gap-5"
+                            className="bg-white p-2 md:p-5 flex flex-col gap-5 pattern-1 shadow-lg"
                             encType="multipart/form-data"
                         >
                             <div className="flex flex-col gap-3">
@@ -101,7 +102,7 @@ function PengaturanAdmin({ auth }) {
                                 <input
                                     type="text"
                                     id="nama"
-                                    className="mt-1 block w-full"
+                                    className="mt-1 block w-full border-none outline-none bg-blue-50"
                                     value={data.nama}
                                     onChange={(e) =>
                                         setData("nama", e.target.value)
@@ -119,7 +120,7 @@ function PengaturanAdmin({ auth }) {
                                 <input
                                     id="email"
                                     type="email"
-                                    className="mt-1 block w-full"
+                                    className="mt-1 block w-full border-none outline-none bg-blue-50"
                                     value={data.email}
                                     onChange={(e) =>
                                         setData("email", e.target.value)
@@ -137,7 +138,7 @@ function PengaturanAdmin({ auth }) {
                                 <input
                                     type="text"
                                     id="kontak"
-                                    className="mt-1 block w-full"
+                                    className="mt-1 block w-full border-none outline-none bg-blue-50"
                                     value={data.kontak}
                                     onChange={(e) =>
                                         setData("kontak", e.target.value)

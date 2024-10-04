@@ -32,8 +32,8 @@ function AffiliateSideBar({ children, gambar, nama }) {
         },
     ];
     return (
-        <div className="overflow-hidden">
-            <div className="fixed w-full p-3 border-b bg-white z-40">
+        <div className="overflow-hidden pattern-1">
+            <div className="fixed w-full p-3 border-b bg-white z-40 pattern-1">
                 <div className="flex px-5 md:px-0 justify-between md:justify-end pr-5">
                     <div
                         onClick={() => setOpen(true)}
@@ -59,7 +59,7 @@ function AffiliateSideBar({ children, gambar, nama }) {
                 </div>
             </div>
             <div
-                className={`transition-all duration-500 md:block fixed w-64 h-screen border-r bg-white z-50 ${
+                className={`transition-all duration-500 md:block fixed w-64 h-screen border-r bg-white z-50 pattern-1 ${
                     open ? "ml-0" : "-ml-[600px]"
                 }`}
             >
@@ -67,23 +67,19 @@ function AffiliateSideBar({ children, gambar, nama }) {
                     <img src="/assets/logo.png" alt="" className="w-12 h-12" />
                     <h1 className="font-bold">Event Academy</h1>
                 </div>
-                <div className="mt-10 flex flex-col gap-5">
+                <div className="mt-10 flex flex-col">
                     {sidebar.map((i) => (
                         <Link
                             key={i.nama}
                             href={i.link}
                             method={`${i.nama === "Logout" ? "post" : ""}`}
-                            className={`transition-all duration-500 px-10 p-1 flex items-center gap-2 ${
+                            className={`transition-all duration-500 py-5 px-10 p-1 flex items-center gap-5 ${
                                 url === i.link
-                                    ? "font-bold bg-blue-800 border-2 border-blue-800 text-white hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-500/50"
-                                    : ""
+                                    ? "font-bold bg-blue-50 hover:bg-blue-100"
+                                    : "hover:bg-blue-50"
                             }`}
                         >
-                            <img
-                                src={i.gambar}
-                                alt=""
-                                className="w-12 h-12 p-2 bg-white"
-                            />
+                            <img src={i.gambar} alt="" className="w-8 h-8" />
                             {i.nama}
                         </Link>
                     ))}
@@ -93,28 +89,24 @@ function AffiliateSideBar({ children, gambar, nama }) {
                     onClick={() => setOpen(false)}
                 ></div>
             </div>
-            <div className="hidden transition-all duration-500 md:block fixed w-64 h-screen border-r bg-white z-50">
+            <div className="hidden transition-all duration-500 md:block fixed w-64 h-screen border-r bg-white z-50 pattern-1">
                 <div className="flex flex-col items-center gap-5 p-5">
                     <img src="/assets/logo.png" alt="" className="w-12 h-12" />
                     <h1 className="font-bold">Event Academy</h1>
                 </div>
-                <div className="mt-10 flex flex-col gap-5">
+                <div className="mt-10 flex flex-col">
                     {sidebar.map((i) => (
                         <Link
                             key={i.nama}
                             href={i.link}
                             method={`${i.nama === "Logout" ? "post" : ""}`}
-                            className={`transition-all duration-500 px-10 p-1 flex items-center gap-2 ${
+                            className={`transition-all duration-500 px-10 py-5 flex items-center gap-5 ${
                                 url === i.link
-                                    ? "font-bold bg-blue-800 border-2 border-blue-800 text-white hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-500/50"
-                                    : ""
+                                    ? "font-bold bg-blue-50 hover:bg-blue-100"
+                                    : "hover:bg-blue-50"
                             }`}
                         >
-                            <img
-                                src={i.gambar}
-                                alt=""
-                                className="w-12 h-12 p-2 bg-white"
-                            />
+                            <img src={i.gambar} alt="" className="w-8 h-8" />
                             {i.nama}
                         </Link>
                     ))}

@@ -5,7 +5,7 @@ import React from "react";
 
 function Affiliate() {
     return (
-        <div className="">
+        <div className="pattern-1">
             <Head title="Affiliate-Register" />
             <div className="p-10 font-bold text-xl md:text-2xl px-5 md:px-20">
                 <a href="/">&larr; Kembali</a>

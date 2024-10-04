@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import RoleAccess from "../Middleware/RoleAccess";
 import SideBar from "@/Components/SideBar";
+import { Head } from "@inertiajs/react";
 
 function Affiliate({ auth }) {
     const [dataUser, setDataUser] = useState([]);
@@ -27,6 +28,7 @@ function Affiliate({ auth }) {
                         : `storage/${auth.user.gambar}`
                 }
             >
+                <Head title="Affiliate Admin" />
                 <div>
                     <h1 className="font-bold text-3xl md:text-5xl text-center mt-10 md:mt-20">
                         Daftar
@@ -38,10 +40,14 @@ function Affiliate({ auth }) {
                     {dataUser.map((i) => (
                         <div
                             key={i.id}
-                            className="flex flex-col md:flex-row gap-10 items-center bg-white p-5 shadow-lg border-b"
+                            className="flex flex-col md:flex-row gap-10 items-center p-5 shadow-lg border-b bg-white hover:bg-blue-50 cursor-pointer"
                         >
                             <img
-                                src={`/storage/${i.gambar}`}
+                                src={
+                                    i.gambar === null
+                                        ? "/assets/boy.png"
+                                        : `storage/${i.gambar}`
+                                }
                                 alt=""
                                 className="w-[100px] h-[100px] object-cover"
                             />

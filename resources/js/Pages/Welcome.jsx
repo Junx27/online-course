@@ -18,7 +18,7 @@ function Welcome() {
         fetchData();
     }, []);
     return (
-        <div className="overflow-hidden">
+        <div className="overflow-hidden pattern-1">
             <Head title="Welcome" />
             <Navbar />
             <div className="">
@@ -61,9 +61,10 @@ function Welcome() {
                         </h1>
                     </Pattern>
                     <p className="mx-5 md:mx-64 text-center">
-                        Kami menyediakan berbagai kelas yang dapat dikiuti,
-                        pilikah sesuai kebutuhan untuk meng-upgrade kemampuanmu.
-                        Untuk informasi lebih lanjut dapat hubungi kami disini.
+                        "Kami menyediakan berbagai kelas yang dapat diikuti.
+                        Pilihlah sesuai kebutuhan untuk meningkatkan kemampuan
+                        Anda. Untuk informasi lebih lanjut, silakan hubungi kami
+                        di sini."
                     </p>
                 </div>
                 <div className="mt-10 pattern-1 mx-0 md:mx-32">
@@ -71,28 +72,26 @@ function Welcome() {
                         {dataKelas.map((i) => (
                             <div
                                 key={i.id}
-                                className="transition-all duration-500 bg-white shadow hover:shadow-lg hover:shadow-blue-500/50 cursor-pointer"
+                                className="relative group transition-all h-96 duration-500 bg-white shadow-md hover:shadow-lg hover:shadow-blue-500/50 cursor-pointer overflow-hidden"
                             >
                                 <img
                                     src={`storage/${i.gambar_kelas}`}
                                     alt=""
-                                    className="w-full h-96 object-cover"
+                                    className="transition-all duration-500 w-full h-full object-cover group-hover:scale-105"
                                 />
-                                <div className="p-5">
-                                    <h1 className="font-bold text-2xl capitalize">
+                                <div className="inset-0 w-full h-full group-hover:bg-blue-800/50 bg-gradient-to-t from-blue-800 to-transparent absolute mt-20 group-hover:mt-0"></div>
+                                <div className="transition-all duration-500 inset-0 absolute p-5 top-56 group-hover:top-10">
+                                    <h1 className="font-bold text-2xl capitalize text-white line-clamp-2">
                                         {i.nama_kelas}
                                     </h1>
-                                    <p className="my-2 text-justify h-32">
+                                    <p className="transition-all duration-700 text-white group-hover:mt-5 mt-32">
                                         {i.deskripsi_kelas}
                                     </p>
-                                    <div className="mt-5">
-                                        <a href={`/class-detail/${i.id}`}>
-                                            <button className="transition-all py-4 duration-500 font-bold bg-blue-800 p-2 w-full text-center border-2 border-blue-800 text-white hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-500/50">
-                                                Informasi Selengkapnya disini
-                                                &rarr;
-                                            </button>
-                                        </a>
-                                    </div>
+                                </div>
+                                <div className="transition-all duration-500 text-white hover:bg-white/10 p-2 absolute -right-10 group-hover:bottom-5 group-hover:right-5 text-xl font-bold">
+                                    <a href={`/class-detail/${i.id}`}>
+                                        Selengkapnya &rarr;
+                                    </a>
                                 </div>
                             </div>
                         ))}

@@ -48,13 +48,13 @@ function ClassDetail({ id }) {
         post(route("create.class.guest"));
     };
     return (
-        <div className="">
+        <div className="pattern-1">
             {openCreateClass && (
                 <PopOver>
-                    <div className="bg-white p-5">
+                    <div className="pattern-1">
                         <div
                             onClick={() => setOpenCreateClass(false)}
-                            className=" flex justify-end cursor-pointer"
+                            className=" flex justify-end cursor-pointer p-5"
                         >
                             <img
                                 src="/assets/plus.png"
@@ -64,7 +64,7 @@ function ClassDetail({ id }) {
                         </div>
                         <form
                             onSubmit={submit}
-                            className="bg-white p-5 flex flex-col gap-5 w-96"
+                            className="bg-white flex flex-col gap-5 w-96 pattern-1"
                             encType="multipart/form-data"
                         >
                             <input
@@ -75,7 +75,7 @@ function ClassDetail({ id }) {
                                 max={30}
                                 required
                             />
-                            <div className="flex flex-col gap-3">
+                            <div className="flex flex-col gap-3 px-10">
                                 <label
                                     htmlFor="nama_siswa"
                                     className="font-bold text-blue-800"
@@ -85,7 +85,7 @@ function ClassDetail({ id }) {
                                 <input
                                     type="text"
                                     id="nama_siswa"
-                                    className="mt-1 block w-full"
+                                    className="mt-1 block w-full border-none outline-none bg-blue-50"
                                     value={data.nama_siswa}
                                     onChange={(e) =>
                                         setData("nama_siswa", e.target.value)
@@ -94,7 +94,7 @@ function ClassDetail({ id }) {
                                     required
                                 />
                             </div>
-                            <div className="flex flex-col gap-3">
+                            <div className="flex flex-col gap-3 px-10">
                                 <label
                                     htmlFor="kontak_siswa"
                                     className="font-bold text-blue-800"
@@ -104,7 +104,7 @@ function ClassDetail({ id }) {
                                 <input
                                     type="number"
                                     id="kontak_siswa"
-                                    className="mt-1 block w-full"
+                                    className="mt-1 block w-full border-none outline-none bg-blue-50"
                                     value={data.kontak_siswa}
                                     onChange={(e) =>
                                         setData("kontak_siswa", e.target.value)
@@ -112,7 +112,7 @@ function ClassDetail({ id }) {
                                     required
                                 />
                             </div>
-                            <div className="flex flex-col gap-3">
+                            <div className="flex flex-col gap-3 px-10">
                                 <label
                                     htmlFor="email_siswa"
                                     className="font-bold text-blue-800"
@@ -122,7 +122,7 @@ function ClassDetail({ id }) {
                                 <input
                                     type="email"
                                     id="email_siswa"
-                                    className="mt-1 block w-full"
+                                    className="mt-1 block w-full border-none outline-none bg-blue-50"
                                     value={data.email_siswa}
                                     onChange={(e) =>
                                         setData("email_siswa", e.target.value)
@@ -143,10 +143,11 @@ function ClassDetail({ id }) {
                                 name="kelas_id"
                                 className="hidden"
                                 value={data.kelas_id}
+                                required
                             />
                             <button
                                 type="submit"
-                                className="bg-blue-800 text-white p-2 mt-5 font-bold hover:bg-blue-700"
+                                className="bg-blue-800 text-white p-5 mt-5 font-bold hover:bg-blue-700"
                             >
                                 Tambah Kelas
                             </button>
@@ -158,16 +159,7 @@ function ClassDetail({ id }) {
             <div className="relative z-50 p-10 font-bold text-xl md:text-2xl px-5 md:px-20">
                 <a href="/">&larr; Kembali</a>
             </div>
-            <div className="mx-0 md:mx-32 -mt-20">
-                <Pattern>
-                    <img
-                        src={`/storage/${gambar}`}
-                        alt=""
-                        className="w-full h-[400px] object-cover mt-20 md:mt-32"
-                    />
-                </Pattern>
-            </div>
-            <div className="mt-32 md:mt-20 flex justify-between items-center">
+            <div className="mt-0 md:-mt-10 flex flex-col md:flex-row md:justify-between items-center">
                 <div className="w-full px-5 md:px-32">
                     <h1 className="font-bold text-5xl md:text-7xl pattern-1 p-2 text-blue-800 capitalize">
                         {data.nama_kelas}
@@ -177,10 +169,10 @@ function ClassDetail({ id }) {
                         <FormaterRupiah number={harga} />
                     </p>
                 </div>
-                <div className="hidden md:block w-full mx-auto md:p-32">
+                <div className="w-full mx-auto md:p-32 order-first md:order-last">
                     <Pattern>
                         <img
-                            src="/assets/studying.png"
+                            src={`/storage/${gambar}`}
                             alt=""
                             className="w-96 h-96 object-cover"
                         />
@@ -188,7 +180,7 @@ function ClassDetail({ id }) {
                 </div>
             </div>
             <div
-                className="flex justify-center mt-10  md:-mt-10 cursor-pointer md:mb-20"
+                className="mx-5 md:mx-32 mt-10  md:-mt-10 cursor-pointer md:mb-20"
                 onClick={() => setOpenCreateClass(true)}
             >
                 <h1 className="transition-all duration-500 w-96 bg-blue-800 p-5 text-center text-3xl font-bold border-2 border-blue-800 text-white hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-500/50">
@@ -253,7 +245,7 @@ function ClassDetail({ id }) {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-20 mx-5 md:mx-32 pb-64 mt-32 pattern-1">
                 <div className="order-last md:order-first">
                     <h1 className="font-bold text-3xl md:text-5xl">
-                        <span className="text-blue-800 mx-2">Paltform</span>
+                        <span className="text-blue-800 mx-2">Platform</span>
                         <span className="text-yellow-400 mx-2">Offline</span>
                     </h1>
                     <div className="flex flex-col gap-10 mt-10">
@@ -297,7 +289,7 @@ function ClassDetail({ id }) {
                 </div>
                 <div>
                     <h1 className="font-bold text-5xl">
-                        <span className="text-blue-800 mx-2">Paltform</span>
+                        <span className="text-blue-800 mx-2">Platform</span>
                         <span className="text-yellow-400 mx-2">Online</span>
                     </h1>
                     <div className="flex flex-col gap-10 mt-10">

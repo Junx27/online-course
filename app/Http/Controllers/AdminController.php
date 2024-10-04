@@ -48,10 +48,21 @@ class AdminController extends Controller
         $kelas = DataKelas::findOrFail($id);
 
         $validated = $request->validate([
-            'gambar_kelas' => 'required',
+
             "nama_kelas" => 'required',
             'deskripsi_kelas' => 'required',
             'harga_kelas' => 'required',
+
+        ]);
+        $kelas->update($validated);
+        return Inertia::location("/class");
+    }
+    public function updateGambarClass(Request $request, String $id)
+    {
+        $kelas = DataKelas::findOrFail($id);
+
+        $validated = $request->validate([
+            'gambar_kelas' => 'required',
 
         ]);
 
@@ -72,6 +83,11 @@ class AdminController extends Controller
 
 
         return Inertia::location("/class");
+    }
+    public function updateGambarClassView(Request $request, String $id)
+    {
+
+        return Inertia::render("Admin/Gambar", ["id" => $id]);
     }
 
     public function deleteClass(String $id)

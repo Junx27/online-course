@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import RoleAccess from "../Middleware/RoleAccess";
 import AffiliateSideBar from "@/Components/AffiliateSideBar";
 import axios from "axios";
+import { Head } from "@inertiajs/react";
 
 function DataAffiliate({ auth }) {
     const [dataSiswa, setDataSiswa] = useState([]);
@@ -85,6 +86,7 @@ function DataAffiliate({ auth }) {
                 }
             >
                 <div>
+                    <Head title="Data Affiliate" />
                     <h1 className="font-bold text-3xl md:text-5xl text-center mt-10 md:mt-20">
                         Daftar
                         <span className="text-blue-800 mx-2">Affiliate</span>
@@ -102,7 +104,7 @@ function DataAffiliate({ auth }) {
                         .map((i) => (
                             <div
                                 key={i.id}
-                                className="flex flex-col md:flex-row gap-10 items-center bg-white p-5 shadow-lg border-b"
+                                className="flex flex-col md:flex-row gap-10 items-center bg-white p-5 shadow-lg border-b hover:bg-blue-50"
                                 id={`pdf-content-${i.id}`}
                             >
                                 <img
@@ -111,7 +113,7 @@ function DataAffiliate({ auth }) {
                                     className="w-64 h-64 object-cover"
                                 />
                                 <div className="w-full">
-                                    <h1 className="my-2">
+                                    <h1 className="my-2 truncate w-32">
                                         <span className="font-bold">
                                             Nama Kelas:
                                         </span>
@@ -141,7 +143,7 @@ function DataAffiliate({ auth }) {
                                     </h1>
                                 </div>
                                 <div className="w-full">
-                                    <h1 className="my-2">
+                                    <h1 className="my-2 truncate w-32">
                                         <span className="font-bold">
                                             Nama Siswa:
                                         </span>
@@ -182,7 +184,7 @@ function DataAffiliate({ auth }) {
                                     </h1>
                                 </div>
                                 <div className="w-full">
-                                    <h1 className="my-2">
+                                    <h1 className="my-2 truncate w-32">
                                         <span className="font-bold">
                                             Nama Affiliate:
                                         </span>

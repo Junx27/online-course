@@ -3,6 +3,7 @@ import SideBar from "@/Components/SideBar";
 import React, { useEffect, useState } from "react";
 import RoleAccess from "../Middleware/RoleAccess";
 import axios from "axios";
+import { Head } from "@inertiajs/react";
 
 function Dashboard({ auth }) {
     const [dataKelas, setDataKelas] = useState([]);
@@ -20,7 +21,9 @@ function Dashboard({ auth }) {
         };
         const fetchAffiliate = async () => {
             try {
-                const response = await axios.get("/api/data-kelas-affiliate");
+                const response = await axios.get(
+                    "/api/data-kelas-affiliate-admin"
+                );
                 setDataAffiliate(response.data);
             } catch (error) {
                 console.error("Error fetching data:", error);
@@ -50,6 +53,7 @@ function Dashboard({ auth }) {
                 }
             >
                 <div>
+                    <Head title="Dashboard Admin" />
                     <div>
                         <h1 className="font-bold text-3xl md:text-5xl mt-10 md:m-20 text-center">
                             Selamat Datang
@@ -65,7 +69,7 @@ function Dashboard({ auth }) {
                         </p>
                     </div>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mt-10 pattern-1 p-5 md:p-10">
-                        <div className="bg-white shadow-lg p-5 md:p-10 text-center cursor-pointer hover:shadow-xl">
+                        <div className="transition-all duration-500 bg-white shadow-lg p-5 md:p-10 text-center cursor-pointer hover:shadow-xl">
                             <img
                                 src="/assets/blackboard.png"
                                 alt=""
@@ -76,7 +80,7 @@ function Dashboard({ auth }) {
                             </p>
                             <p className="text-center mt-3">Kelas aktif</p>
                         </div>
-                        <div className="bg-white shadow-lg p-5 md:p-10 text-center cursor-pointer hover:shadow-xl">
+                        <div className="transition-all duration-500 bg-white shadow-lg p-5 md:p-10 text-center cursor-pointer hover:shadow-xl">
                             <img
                                 src="/assets/notebooks.png"
                                 alt=""
@@ -87,7 +91,7 @@ function Dashboard({ auth }) {
                             </p>
                             <p className="text-center mt-3">Kelas Affiliate</p>
                         </div>
-                        <div className="bg-white shadow-lg p-5 md:p-10 text-center cursor-pointer hover:shadow-xl">
+                        <div className="transition-all duration-500 bg-white shadow-lg p-5 md:p-10 text-center cursor-pointer hover:shadow-xl">
                             <img
                                 src="/assets/notes.png"
                                 alt=""
@@ -102,7 +106,7 @@ function Dashboard({ auth }) {
                             </p>
                             <p className="text-center mt-3">Affiliate Sukses</p>
                         </div>
-                        <div className="bg-white shadow-lg p-5 md:p-10 text-center cursor-pointer hover:shadow-xl">
+                        <div className="transition-all duration-500 bg-white shadow-lg p-5 md:p-10 text-center cursor-pointer hover:shadow-xl">
                             <img
                                 src="/assets/laptop.png"
                                 alt=""

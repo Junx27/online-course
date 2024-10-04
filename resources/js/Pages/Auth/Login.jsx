@@ -23,16 +23,16 @@ export default function Login({ status, canResetPassword }) {
     };
 
     return (
-        <div className="">
+        <div className="pattern-1 h-screen">
             <Head title="Log in" />
             <div className="p-10 font-bold text-xl md:text-2xl px-5 md:px-20">
                 <a href="/affiliate-register">&larr; Kembali</a>
             </div>
             <Pattern>
-                <div className="w-96 p-5 pattern-1 mx-auto mt-32">
+                <div className="w-96 p-5 pattern-1 mx-auto mt-32 shadow-lg">
                     <form
                         action=""
-                        className="bg-white p-5 flex flex-col gap-5"
+                        className="p-5 flex flex-col gap-5"
                         onSubmit={submit}
                     >
                         <div className="flex flex-col gap-3">
@@ -51,7 +51,7 @@ export default function Login({ status, canResetPassword }) {
                                 type="email"
                                 name="email"
                                 value={data.email}
-                                className="mt-1 block w-full"
+                                className="mt-1 block w-full border-none outline-none bg-blue-50"
                                 autoComplete="username"
                                 isFocused={true}
                                 onChange={(e) =>
@@ -75,7 +75,7 @@ export default function Login({ status, canResetPassword }) {
                                 type="password"
                                 name="password"
                                 value={data.password}
-                                className="mt-1 block w-full"
+                                className="mt-1 block w-full border-none outline-none bg-blue-50"
                                 autoComplete="current-password"
                                 onChange={(e) =>
                                     setData("password", e.target.value)

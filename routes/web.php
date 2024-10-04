@@ -24,6 +24,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/delete-siswa/{id}', [AdminController::class, "deletPesanan"]);
     Route::post("/create-class", [AdminController::class, "createClass"])->name("create.class");
     Route::put("/update-class/{id}", [AdminController::class, "updateClass"]);
+    Route::put("/update-gambar-class/{id}", [AdminController::class, "updateGambarClass"]);
     Route::delete("/delete-class/{id}", [AdminController::class, "deleteClass"]);
     Route::get('/dashboard', [AdminController::class, "dashboard"])->name("dashboard.admin");
     Route::get('/class', [AdminController::class, "class"])->name(name: "class.admin");

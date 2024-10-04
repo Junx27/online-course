@@ -83,16 +83,24 @@ class UserController extends Controller
 
     public function dataAffiliate(Request $request)
     {
-        // Ambil user_id dari request atau dari authenticated user
-        $userId = $request->user()->id; // Jika menggunakan autentikasi
 
-        // Ambil data affiliate berdasarkan user_id
+        $userId = $request->user()->id;
         $dataAffiliate = DataAffiliate::with([
             'user:id,nama,email,kontak',
             'kelas:id,nama_kelas,gambar_kelas,harga_kelas,deskripsi_kelas'
         ])
-            ->where('user_id', $userId) // Filter berdasarkan user_id
+            ->where('user_id', $userId)
             ->get();
+
+        return response()->json($dataAffiliate);
+    }
+    public function dataAffiliateAdmin(Request $request)
+    {
+
+        $dataAffiliate = DataAffiliate::with([
+            'user:id,nama,email,kontak',
+            'kelas:id,nama_kelas,gambar_kelas,harga_kelas,deskripsi_kelas'
+        ])->get();
 
         return response()->json($dataAffiliate);
     }

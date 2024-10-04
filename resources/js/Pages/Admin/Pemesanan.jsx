@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import RoleAccess from "../Middleware/RoleAccess";
 import SideBar from "@/Components/SideBar";
 import axios from "axios";
-import { useForm } from "@inertiajs/react";
+import { Head, useForm } from "@inertiajs/react";
 import FormaterRupiah from "@/Components/FormaterRupiah";
 
 function Pemesanan({ auth }) {
@@ -33,6 +33,7 @@ function Pemesanan({ auth }) {
                         : `storage/${auth.user.gambar}`
                 }
             >
+                <Head title="Konfirmasi Kelas" />
                 <div>
                     <h1 className="font-bold text-3xl md:text-5xl text-center mt-10 md:mt-20">
                         Daftar
@@ -44,7 +45,7 @@ function Pemesanan({ auth }) {
                     {dataSiswa.map((i) => (
                         <div
                             key={i.id}
-                            className="flex flex-col md:flex-row gap-10 items-center bg-white p-5 shadow-lg border-b"
+                            className="flex flex-col md:flex-row gap-10 items-center bg-white hover:bg-blue-50 p-5 shadow-lg border-b cursor-pointer"
                             id={`pdf-content-${i.id}`}
                         >
                             <img
@@ -53,7 +54,7 @@ function Pemesanan({ auth }) {
                                 className="w-64 h-64 object-cover"
                             />
                             <div className="w-full">
-                                <h1 className="my-2">
+                                <h1 className="my-2 truncate w-32">
                                     <span className="font-bold">
                                         Nama Kelas:
                                     </span>
@@ -83,7 +84,7 @@ function Pemesanan({ auth }) {
                                 </h1>
                             </div>
                             <div className="w-full">
-                                <h1 className="my-2">
+                                <h1 className="my-2 truncate w-32">
                                     <span className="font-bold">
                                         Nama Siswa:
                                     </span>
@@ -119,7 +120,7 @@ function Pemesanan({ auth }) {
                                 </h1>
                             </div>
                             <div className="w-full">
-                                <h1 className="my-2">
+                                <h1 className="my-2 truncate w-32">
                                     <span className="font-bold">
                                         Nama Affiliate:
                                     </span>

@@ -17,7 +17,7 @@ export default function ForgotPassword({ status }) {
     };
 
     return (
-        <div>
+        <div className="pattern-1 h-screen">
             <Head title="Forgot Password" />
             <div className="p-10">
                 <a href="/">&larr; Kembali</a>
@@ -26,7 +26,8 @@ export default function ForgotPassword({ status }) {
                 <div className="w-96 p-5 pattern-1 mx-auto mt-32">
                     <form onSubmit={submit}>
                         <p className="p-2 bg-white mb-5">
-                            Masukan email terdaftar untuk pemulihan kata sandi
+                            Masukan email terdaftar untuk pemulihan kata sandi,
+                            jika tidak ada pesan masuk lihat dispam.
                         </p>
                         <InputError message={errors.email} className="mt-2" />
                         <input
@@ -34,7 +35,7 @@ export default function ForgotPassword({ status }) {
                             type="email"
                             name="email"
                             value={data.email}
-                            className="mt-1 block w-full"
+                            className="mt-1 block w-full border-none outline-none bg-blue-50"
                             isFocused={true}
                             onChange={(e) => setData("email", e.target.value)}
                         />

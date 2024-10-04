@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import RoleAccess from "../Middleware/RoleAccess";
 import SideBar from "@/Components/SideBar";
-import { useForm } from "@inertiajs/react";
+import { Head, useForm } from "@inertiajs/react";
 import axios from "axios";
 import FormaterRupiah from "@/Components/FormaterRupiah";
 
@@ -40,6 +40,7 @@ function Siswa({ auth }) {
                         : `storage/${auth.user.gambar}`
                 }
             >
+                <Head title="Siswa Admin" />
                 <div>
                     <h1 className="font-bold text-3xl md:text-5xl text-center mt-10 md:mt-20">
                         Daftar
@@ -53,7 +54,7 @@ function Siswa({ auth }) {
                     {dataSiswa.map((i) => (
                         <div
                             key={i.id}
-                            className="flex flex-col md:flex-row gap-10 items-center bg-white p-5 shadow-lg border-b"
+                            className="flex flex-col md:flex-row gap-10 items-center bg-white p-5 shadow-lg border-b hover:bg-blue-50"
                             id={`pdf-content-${i.id}`}
                         >
                             <img
@@ -62,7 +63,7 @@ function Siswa({ auth }) {
                                 className="w-64 h-64 object-cover"
                             />
                             <div className="w-full">
-                                <h1 className="my-2">
+                                <h1 className="my-2 truncate w-32">
                                     <span className="font-bold">
                                         Nama Kelas:
                                     </span>
@@ -92,7 +93,7 @@ function Siswa({ auth }) {
                                 </h1>
                             </div>
                             <div className="w-full">
-                                <h1 className="my-2">
+                                <h1 className="my-2 truncate w-32">
                                     <span className="font-bold">
                                         Nama Siswa:
                                     </span>
@@ -128,7 +129,7 @@ function Siswa({ auth }) {
                                 </h1>
                             </div>
                             <div className="w-full">
-                                <h1 className="my-2">
+                                <h1 className="my-2 truncate w-32">
                                     <span className="font-bold">
                                         Nama Affiliate:
                                     </span>

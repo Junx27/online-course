@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 import RoleAccess from "../Middleware/RoleAccess";
 import SideBar from "@/Components/SideBar";
 import PopOver from "@/Components/PopOver";
-import { useForm } from "@inertiajs/react";
+import { Head, useForm } from "@inertiajs/react";
 import axios from "axios";
 import FormaterRupiah from "@/Components/FormaterRupiah";
+import Gambar from "./Gambar";
 
 function Class({ auth }) {
     const [openCreateClass, setOpenCreateClass] = useState(false);
     const [openEditClass, setOpenEditClass] = useState(false);
+    const [openEditClassGambar, setOpenEditClassGambar] = useState(false);
     const [dataKelas, setDataKelas] = useState([]);
     const [id, setId] = useState(null);
     const [image, setImage] = useState(null);
@@ -19,7 +21,6 @@ function Class({ auth }) {
         put,
         delete: destroy,
     } = useForm({
-        id_gambar: "",
         gambar_kelas: "",
         nama_kelas: "",
         deskripsi_kelas: "",
@@ -49,7 +50,6 @@ function Class({ auth }) {
                 try {
                     const response = await axios.get(`/api/kelas/${id}`);
                     setData({
-                        id_gambar: response.data.id,
                         gambar_kelas: response.data.gambar_kelas,
                         nama_kelas: response.data.nama_kelas,
                         deskripsi_kelas: response.data.deskripsi_kelas,
@@ -71,8 +71,12 @@ function Class({ auth }) {
     const handleUpdate = (e) => {
         e.preventDefault();
         if (id !== null) {
-            put(`/update-class/${id}`, data);
+            put(`/update-class/${id}`);
         }
+    };
+    const handleImage = (id) => {
+        setId(id);
+        setOpenEditClassGambar(true);
     };
     const handleDelete = (id) => {
         destroy(`/delete-class/${id}`);
@@ -87,12 +91,23 @@ function Class({ auth }) {
                         : `storage/${auth.user.gambar}`
                 }
             >
+                <Head title="Kelas Admin" />
+                {openEditClassGambar && (
+                    <PopOver>
+                        <Gambar
+                            id={id}
+                            gambar={data.gambar_kelas}
+                            handleClose={() => setOpenEditClassGambar(false)}
+                        />
+                    </PopOver>
+                )}
+
                 {openCreateClass && (
                     <PopOver>
-                        <div className="bg-white p-5">
+                        <div className="bg-white pattern-1">
                             <div
                                 onClick={() => setOpenCreateClass(false)}
-                                className=" flex justify-end cursor-pointer"
+                                className=" flex justify-end cursor-pointer p-5"
                             >
                                 <img
                                     src="/assets/plus.png"
@@ -102,10 +117,10 @@ function Class({ auth }) {
                             </div>
                             <form
                                 onSubmit={submit}
-                                className="bg-white p-5 flex flex-col gap-1 md:gap-5"
+                                className="bg-white flex flex-col gap-1 md:gap-5 pattern-1"
                                 encType="multipart/form-data"
                             >
-                                <div className="flex flex-col gap-3">
+                                <div className="flex flex-col px-5">
                                     <label
                                         htmlFor="gambar_kelas"
                                         className="font-bold text-blue-800"
@@ -124,7 +139,7 @@ function Class({ auth }) {
                                         id="gambar_kelas"
                                         type="file"
                                         name="gambar_kelas"
-                                        className="block w-full text-sm text-gray-500
+                                        className="mt-2 block w-full text-sm text-gray-500
                                    file:mr-4 file:py-2 file:px-4
                                    file:border-0
                                    file:text-sm file:font-semibold
@@ -135,17 +150,17 @@ function Class({ auth }) {
                                         required
                                     />
                                 </div>
-                                <div className="flex flex-col gap-1 md:gap-3">
+                                <div className="flex flex-col gap-1 px-5">
                                     <label
                                         htmlFor="nama_kelas"
-                                        className="font-bold text-blue-800"
+                                        className="text-sm font-bold text-blue-800"
                                     >
                                         Nama Kelas
                                     </label>
                                     <input
                                         type="text"
-                                        id="nama"
-                                        className="mt-1 block w-full"
+                                        id="nama_kelas"
+                                        className="mt-1 block w-full border-none outline-none bg-blue-50"
                                         value={data.nama_kelas}
                                         onChange={(e) =>
                                             setData(
@@ -157,17 +172,17 @@ function Class({ auth }) {
                                         required
                                     />
                                 </div>
-                                <div className="flex flex-col gap-3">
+                                <div className="flex flex-col gap-1 px-5">
                                     <label
                                         htmlFor="harga_kelas"
-                                        className="font-bold text-blue-800"
+                                        className="text-sm font-bold text-blue-800"
                                     >
                                         Harga Kelas
                                     </label>
                                     <input
                                         type="text"
                                         id="harga_kelas"
-                                        className="mt-1 block w-full"
+                                        className="mt-1 block w-full border-none outline-none  bg-blue-50"
                                         value={data.harga_kelas}
                                         onChange={(e) =>
                                             setData(
@@ -178,10 +193,10 @@ function Class({ auth }) {
                                         required
                                     />
                                 </div>
-                                <div className="flex flex-col gap-3">
+                                <div className="flex flex-col gap-1 px-5">
                                     <label
                                         htmlFor="deskripsi_kelas"
-                                        className="font-bold text-blue-800"
+                                        className="text-sm font-bold text-blue-800"
                                     >
                                         Deskripsi
                                     </label>
@@ -189,7 +204,7 @@ function Class({ auth }) {
                                         id="text"
                                         name="deskripsi_kelas"
                                         type="text"
-                                        className="mt-1 block w-full"
+                                        className="mt-1 block w-full border-none outline-none bg-blue-50"
                                         value={data.deskripsi_kelas}
                                         onChange={(e) =>
                                             setData(
@@ -209,7 +224,7 @@ function Class({ auth }) {
                                 />
                                 <button
                                     type="submit"
-                                    className="bg-blue-800 text-white p-2 mt-5 font-bold hover:bg-blue-700"
+                                    className="bg-blue-800 text-white p-5 mt-5 font-bold hover:bg-blue-700"
                                 >
                                     Tambah Kelas
                                 </button>
@@ -219,10 +234,10 @@ function Class({ auth }) {
                 )}
                 {openEditClass && (
                     <PopOver>
-                        <div className="bg-white p-5">
+                        <div className="bg-white pattern-1">
                             <div
                                 onClick={() => setOpenEditClass(false)}
-                                className=" flex justify-end cursor-pointer"
+                                className=" flex justify-end cursor-pointer p-5"
                             >
                                 <img
                                     src="/assets/plus.png"
@@ -232,49 +247,20 @@ function Class({ auth }) {
                             </div>
                             <form
                                 onSubmit={handleUpdate}
-                                className="bg-white p-5 flex flex-col gap-1 md:gap-5"
+                                className="bg-white w-96 flex flex-col gap-1 md:gap-5 pattern-1"
                                 encType="multipart/form-data"
                             >
-                                <div className="flex flex-col gap-3">
-                                    <label
-                                        htmlFor="gambar_kelas"
-                                        className="font-bold text-blue-800"
-                                    >
-                                        <img
-                                            src={
-                                                image === null
-                                                    ? `storage/${data.gambar_kelas}`
-                                                    : image
-                                            }
-                                            alt=""
-                                            className="w-full h-32 md:h-[150px] object-cover"
-                                        />
-                                    </label>
-                                    <input
-                                        id="gambar_kelas"
-                                        type="file"
-                                        name="gambar_kelas"
-                                        className="block w-full text-sm text-gray-500
-                                   file:mr-4 file:py-2 file:px-4
-                                   file:border-0
-                                   file:text-sm file:font-semibold
-                                   file:bg-blue-50 file:text-blue-700
-                                   hover:file:bg-blue-100"
-                                        accept="image/*"
-                                        onChange={handleFileChange}
-                                    />
-                                </div>
-                                <div className="flex flex-col gap-1 md:gap-3">
+                                <div className="flex flex-col gap-1 px-5">
                                     <label
                                         htmlFor="nama_kelas"
-                                        className="font-bold text-blue-800"
+                                        className="text-sm font-bold text-blue-800"
                                     >
                                         Nama Kelas
                                     </label>
                                     <input
                                         type="text"
                                         id="nama"
-                                        className="mt-1 block w-full"
+                                        className="mt-1 block w-full border-none outline-none bg-blue-50"
                                         value={data.nama_kelas}
                                         onChange={(e) =>
                                             setData(
@@ -286,17 +272,17 @@ function Class({ auth }) {
                                         required
                                     />
                                 </div>
-                                <div className="flex flex-col gap-3">
+                                <div className="flex flex-col gap-1 px-5">
                                     <label
                                         htmlFor="harga_kelas"
-                                        className="font-bold text-blue-800"
+                                        className="text-sm font-bold text-blue-800"
                                     >
                                         Harga Kelas
                                     </label>
                                     <input
                                         type="text"
                                         id="harga_kelas"
-                                        className="mt-1 block w-full"
+                                        className="mt-1 block w-full border-none outline-none bg-blue-50"
                                         value={data.harga_kelas}
                                         onChange={(e) =>
                                             setData(
@@ -307,10 +293,10 @@ function Class({ auth }) {
                                         required
                                     />
                                 </div>
-                                <div className="flex flex-col gap-3">
+                                <div className="flex flex-col gap-1 px-5">
                                     <label
                                         htmlFor="deskripsi_kelas"
-                                        className="font-bold text-blue-800"
+                                        className="text-sm font-bold text-blue-800"
                                     >
                                         Deskripsi
                                     </label>
@@ -318,7 +304,7 @@ function Class({ auth }) {
                                         id="text"
                                         name="deskripsi_kelas"
                                         type="text"
-                                        className="mt-1 block w-full"
+                                        className="mt-1 block w-full border-none outline-none bg-blue-50"
                                         value={data.deskripsi_kelas}
                                         onChange={(e) =>
                                             setData(
@@ -331,16 +317,12 @@ function Class({ auth }) {
                                         required
                                     />
                                 </div>
-                                <input
-                                    type="text"
-                                    value={data.user_id}
-                                    className="hidden"
-                                />
+
                                 <button
                                     type="submit"
-                                    className="bg-blue-800 text-white p-2 mt-5 font-bold hover:bg-blue-700"
+                                    className="bg-blue-800 text-white p-5 mt-5 font-bold hover:bg-blue-700"
                                 >
-                                    Update Kelas
+                                    Ubah Kelas
                                 </button>
                             </form>
                         </div>
@@ -360,13 +342,12 @@ function Class({ auth }) {
                     onClick={() => setOpenCreateClass(true)}
                     className="cursor-pointer"
                 >
-                    <div className="ml-5 md:ml-0 transition-all duration-500 md:mt-10 flex items-center gap-5 font-bold md:bg-blue-800 p-2 w-64 text-center md:border-2 md:border-blue-800 text-white md:hover:bg-blue-700 md:hover:shadow-lg md:hover:shadow-blue-500/50">
+                    <div className="fixed z-30 bottom-5 right-5 md:top-20 md:right-10">
                         <img
                             src="/assets/plus.png"
                             alt=""
-                            className="w-10 h-10 md:bg-white p-0 md:p-2"
+                            className="w-12 h-12 bg-white rounded-full"
                         />
-                        <p className="hidden md:block">Tambah kelas</p>
                     </div>
                 </div>
                 <div className="mt-10 pattern-1">
@@ -374,39 +355,57 @@ function Class({ auth }) {
                         {dataKelas.map((i) => (
                             <div
                                 key={i.id}
-                                className="transition-all duration-500 bg-white shadow hover:shadow-lg hover:shadow-blue-500/50 cursor-pointer"
+                                className="relative h-96 group transition-all duration-500 bg-white shadow hover:shadow-lg hover:shadow-blue-500/50 cursor-pointer overflow-hidden"
                             >
                                 <img
                                     src={`storage/${i.gambar_kelas}`}
                                     alt=""
-                                    className="w-full h-96 object-cover"
+                                    className="transition-all duration-500 w-full h-full object-cover group-hover:scale-105"
                                 />
-                                <div className="p-5">
-                                    <h1 className="font-bold text-2xl capitalize">
+                                <div className="inset-0 w-full h-full group-hover:bg-blue-800/50 bg-gradient-to-t from-blue-800 to-transparent absolute mt-20 group-hover:mt-0"></div>
+                                <div className="transition-all duration-500 inset-0 absolute p-5 top-64 group-hover:top-10">
+                                    <h1 className="font-bold text-2xl capitalize text-white line-clamp-2">
                                         {i.nama_kelas}
                                     </h1>
-                                    <p className="my-2 text-justify h-32">
+                                    <p className="transition-all duration-700 text-white group-hover:mt-5 mt-32 line-clamp-3">
                                         {i.deskripsi_kelas}
                                     </p>
-                                    <p className="mt-2 text-blue-800 font-bold text-2xl">
+                                    <p className="transition-all duration-700 text-white group-hover:mt-5 mt-32 text-2xl">
                                         <FormaterRupiah
                                             number={i.harga_kelas}
                                         />
                                     </p>
-                                    <div className="flex justify-between mt-10 mx-10">
-                                        <div onClick={() => handleEdit(i.id)}>
-                                            <img
-                                                src="/assets/edit.png"
-                                                alt=""
-                                                className="w-10 h-10"
-                                            />
-                                        </div>
-                                        <div onClick={() => handleDelete(i.id)}>
-                                            <img
-                                                src="/assets/delete.png"
-                                                alt=""
-                                                className="w-10 h-10"
-                                            />
+                                    <div className="transition-all w-full duration-500 absolute -right-10 group-hover:bottom-5 group-hover:right-0">
+                                        <div className="flex justify-between mt-10 mx-10">
+                                            <div
+                                                onClick={() => handleEdit(i.id)}
+                                            >
+                                                <img
+                                                    src="/assets/edit.png"
+                                                    alt=""
+                                                    className="w-10 h-10 bg-white p-2 rounded-full"
+                                                />
+                                            </div>
+                                            <div
+                                                onClick={() =>
+                                                    handleImage(i.id)
+                                                }
+                                            >
+                                                <p className="text-white bg-white/20 p-2 hover:bg-white/50">
+                                                    Ubah gambar
+                                                </p>
+                                            </div>
+                                            <div
+                                                onClick={() =>
+                                                    handleDelete(i.id)
+                                                }
+                                            >
+                                                <img
+                                                    src="/assets/delete.png"
+                                                    alt=""
+                                                    className="w-10 h-10"
+                                                />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
